@@ -1,7 +1,10 @@
-import statusCode from './status-codes';
+import statusCodes from './status-codes';
+import config from './config';
 
 const Radix = {
-    Ten: 10
+  Ten: 10,
 };
 
-export { statusCode, Radix };
+const constants = { statusCodes, Radix, config };
+
+export { constants };

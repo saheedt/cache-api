@@ -1,8 +1,10 @@
 import { CustomError } from './custom-error';
-import { statusCode } from '../utils/constants';
+import { constants } from '../utils/';
+
+const { statusCodes } = constants;
 
 export class RouteNotFoundError extends CustomError {
-  statusCode = statusCode.NotFound;
+  statusCode = statusCodes.NotFound;
   constructor() {
     super('Route not found');
 
