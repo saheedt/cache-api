@@ -32,8 +32,8 @@ export default class CacheController {
   async fetchAllCache(req: Request, res: Response) {
     try {
       const caches = await Cache.find();
-      if (!caches) {
-        throw new NotFoundError('Not records found');
+      if (!caches || !caches.length) {
+        throw new NotFoundError('No records found');
       }
       const keys = caches.map((cache) => cache.key);
       res.status(statusCodes.OK).send({ keys });
