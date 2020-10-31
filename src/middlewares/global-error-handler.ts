@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { CustomError } from '../errors/custom-error';
-import { statusCode } from '../utils/constants/';
+import { constants } from '../utils/';
+
+const { statusCodes } = constants;
 
 const globalErrorHandler = (
   err: Error,
@@ -13,7 +15,7 @@ const globalErrorHandler = (
   }
   console.error(err);
   res
-    .status(statusCode.InternalServerError)
+    .status(statusCodes.InternalServerError)
     .send({ errors: [{ message: 'something went wrong' }] });
 };
 
