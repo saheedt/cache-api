@@ -13,6 +13,10 @@ Cache api aims to store a collection of records for a duration of time
 - First run `npm install` to install all dependencies
 - Supply all environments variables needed as specified by `.env.sample` file
 - run `npm run dev` for dev
+- run `npm start` for production build
+
+## Test
+- run `npm run test` for automated test
 
 ## Tools used
 
@@ -22,6 +26,3 @@ Cache api aims to store a collection of records for a duration of time
 - [MongoDB](https://www.mongodb.com/)
 - [Mongoose](https://mongoosejs.com/)
 
-## NOTE
-
-#### Ran out of time, so I decided to stop where I had gotten.
