@@ -17,9 +17,12 @@ const start = async () => {
   if (!process.env.TTL) {
     throw new Error('TTL must be defined.');
   }
+  if (!process.env.MAX_CACHE_ITEMS) {
+    throw new Error('MAX_CACHE_ITEMS must be defined.');
+  }
 
   try {
-    console.log('MONGO_URI:', process.env.MONGO_URI);
+    mongoose.set('useFindAndModify', false);
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
