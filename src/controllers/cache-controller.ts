@@ -16,7 +16,7 @@ export default class CacheController {
       if (!cacheItem || expired) {
         console.log('cache miss');
         const newCaheItem = Cache.build({
-          key,
+          key: generateKey(),
           ttl: config.TTL,
         });
         await newCaheItem.save();
