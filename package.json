@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf build && tsc",
     "dev": "ts-node-dev src/index.ts --poll",
-    "test": "jest --watchAll --no-cache",
+    "test": "jest --no-cache",
     "start": "node ./build/src/index.js",
     "postinstall": "npm run build"
   },
