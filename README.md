@@ -1,9 +1,5 @@
 # cache-api
 
-# pass
-
-A ticketing sale / purchase application built with a micro services architecture
-
 ## Overview
 
 Cache api aims to store a collection of records for a duration of time
