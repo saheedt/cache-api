@@ -22,3 +22,6 @@ Cache api aims to store a collection of records for a duration of time
 - [MongoDB](https://www.mongodb.com/)
 - [Mongoose](https://mongoosejs.com/)
 
+## NOTE
+
+#### Ran out of time, so I decided to stop where I had gotten. To view my complete solution please check this [pull request](https://github.com/saheedt/cache-api/pull/3)
