@@ -6,9 +6,13 @@ Cache api aims to store a collection of records for a duration of time
 
 ## set up
 
-- First run `npm install` to install all dependencies
+- First, run `npm install` to install all dependencies
 - Supply all environments variables needed as specified by `.env.sample` file
 - run `npm run dev` for dev
+- run `npm start` for production build
+
+## Test
+- run `npm run test` for automated test
 
 ## Tools used
 
@@ -21,4 +25,3 @@ Cache api aims to store a collection of records for a duration of time
 ## NOTE
 
 #### Ran out of time, so I decided to stop where I had gotten. To view my complete solution please check this [pull request](https://github.com/saheedt/cache-api/pull/3)
-

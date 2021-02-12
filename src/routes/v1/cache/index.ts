@@ -6,12 +6,20 @@ import { CacheController } from '../../../controllers';
 const router = express.Router();
 
 const { cacheValidations } = validations;
-const { fetchCacheItemSchema, createCacheItemSchema } = cacheValidations;
+const {
+  fetchCacheItemSchema,
+  createCacheItemSchema,
+  updateCacheItemSchema,
+  deleteCacheItemSchema,
+} = cacheValidations;
 
 const {
   fetchCacheItem,
   createCacheItem,
+  updateCacheItem,
+  deleteCacheItem,
   fetchAllCache,
+  deleteCacheItems,
 } = new CacheController();
 
 router.get(
@@ -29,5 +37,21 @@ router.post(
   validateRequest,
   createCacheItem
 );
+
+router.put(
+  '/cache',
+  checkSchema(updateCacheItemSchema),
+  validateRequest,
+  updateCacheItem
+);
+
+router.delete(
+  '/cache/:key',
+  checkSchema(deleteCacheItemSchema),
+  validateRequest,
+  deleteCacheItem
+);
+
+router.delete('/cache', deleteCacheItems);
 
 export { router as cacheRouter };

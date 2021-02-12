@@ -7,7 +7,7 @@ const { config } = constants;
 // required to create a cache
 interface CacheAttrs {
   key: string;
-  ttl: string;
+  ttl: number;
   data?: {
     team: string;
     country: string;
@@ -24,7 +24,7 @@ interface CacheModel extends mongoose.Model<CacheDoc> {
 //  on a saved Cache document
 interface CacheDoc extends mongoose.Document {
   key: string;
-  ttl: string;
+  ttl: Number;
   data?: {
     team: string;
     country: string;
@@ -47,7 +47,7 @@ const cacheSchema = new mongoose.Schema(
       },
     },
     ttl: {
-      type: String,
+      type: Number,
     },
   },
   {
@@ -64,8 +64,12 @@ const cacheSchema = new mongoose.Schema(
 
 cacheSchema.pre('save', async function () {
   const itms = await Cache.find().sort({ created_at: -1 });
+  // before creating any new cache, check if adding new item
+  // will exceed the max cache limit
   if (itms.length + 1 > config.MAX_CACHE_ITEMS) {
-    await Cache.findOneAndDelete({});
+    // if adding new item will cause cache to exceed set limit
+    // find and delete the oldest cache record
+    await Cache.findOneAndDelete({}, { sort: 1 });
   }
 });
 
@@ -73,13 +77,11 @@ cacheSchema.statics.build = (attrs: CacheAttrs) => {
   return new Cache(attrs);
 };
 cacheSchema.methods.isExceededTTL = async function () {
-  const createdTime = new Date(this.createdAt).getTime();
+  const createdTime = new Date(this.updatedAt).getTime();
   const now = new Date().getTime();
-  const diff = now - createdTime;
+  const diff = Math.abs(now - createdTime);
   const lifeSpanSeconds = Math.floor(diff / 1000);
-  const ttlDiff = now - new Date(this.ttl).getTime();
-  const ttlSeconds = Math.floor(ttlDiff / 1000);
-  lifeSpanSeconds > ttlSeconds;
+  return lifeSpanSeconds > this.ttl;
 };
 const Cache = mongoose.model<CacheDoc, CacheModel>('Cache', cacheSchema);
 
